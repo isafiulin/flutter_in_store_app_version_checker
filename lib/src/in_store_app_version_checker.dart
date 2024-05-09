@@ -2,8 +2,7 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:convert';
-import 'dart:developer';
-
+  
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
@@ -142,10 +141,9 @@ final class _InStoreAppVersionCheckerImpl implements InStoreAppVersionChecker {
     String? errorMsg;
     String? newVersion;
     String? url;
-    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-    final uri = Uri.https('itunes.apple.com', '/$locale/lookup',
-        {'bundleId': packageName, 'date': secondsSinceEpoch});
+    final uri = Uri.https(
+        'itunes.apple.com', '/$locale/lookup', {'bundleId': packageName});
 
     try {
       final response = await _httpClient.get(uri);
@@ -159,7 +157,6 @@ final class _InStoreAppVersionCheckerImpl implements InStoreAppVersionChecker {
         final List<dynamic> results = List.from(
           jsonObj['results'] as Iterable<dynamic>,
         );
-        log(results.toString());
 
         if (results.isEmpty) {
           errorMsg =
