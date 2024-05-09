@@ -2,6 +2,7 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 
@@ -160,6 +161,7 @@ final class _InStoreAppVersionCheckerImpl implements InStoreAppVersionChecker {
         final List<dynamic> results = List.from(
           jsonObj['results'] as Iterable<dynamic>,
         );
+        log(results.toString());
 
         if (results.isEmpty) {
           errorMsg =
