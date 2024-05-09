@@ -142,12 +142,10 @@ final class _InStoreAppVersionCheckerImpl implements InStoreAppVersionChecker {
     String? errorMsg;
     String? newVersion;
     String? url;
+    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-    final uri = Uri.https(
-      'itunes.apple.com',
-      '/$locale/lookup',
-      {'bundleId': packageName},
-    );
+    final uri = Uri.https('itunes.apple.com', '/$locale/lookup',
+        {'bundleId': packageName, 'date': secondsSinceEpoch});
 
     try {
       final response = await _httpClient.get(uri);
